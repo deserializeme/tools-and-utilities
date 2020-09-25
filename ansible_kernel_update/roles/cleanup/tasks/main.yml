@@ -1,0 +1,11 @@
+# Role to clean up after all scripts are run -- whether success or failure
+
+- name: Start cron
+  service:
+    name: cron
+    state: started
+  become: yes
+
+- name: Cancel any previously scheduled reboot
+  shell: shutdown -c
+  become: yes

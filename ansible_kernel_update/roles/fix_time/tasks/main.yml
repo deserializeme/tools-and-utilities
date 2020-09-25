@@ -1,0 +1,25 @@
+# Role to setup things before running anything else
+
+- name: Gather facts now that we are in a good state
+  setup:
+
+- name: correct time issues that will cause errors in update by disabling set-ntp
+  shell: timedatectl set-ntp off
+  become: yes
+
+- name: sleep for a second
+  shell: sleep 3
+  
+- name: renable set-ntp to get the new time
+  shell: timedatectl set-ntp on
+  become: yes
+
+- name: Schedule a reboot in case of script failure (24 hours)
+  shell: shutdown -r +1440
+  become: yes
+
+- name: Stop cron to avoid reboots
+  service:
+    name: cron
+    state: stopped
+  become: yes

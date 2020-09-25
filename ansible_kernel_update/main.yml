@@ -1,0 +1,23 @@
+- hosts: all
+  strategy: host_pinned
+  remote_user: user
+  become: yes
+  gather_facts: no
+
+  pre_tasks:
+  - name: Initialize before running
+    include_role:
+      name: fix_time
+
+  roles:
+    - role: mark_packages
+    - role: package_update
+    - role: kernel_upgrade
+    - role: restartmd
+    - role: mark_packages
+    - role: package_update
+      
+  post_tasks:
+  - name: Cleanup after running
+    include_role:
+      name: cleanup

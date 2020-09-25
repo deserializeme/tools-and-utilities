@@ -1,0 +1,54 @@
+#!/bin/bash
+
+jsonFile="/tmp/json.txt"
+
+echo "{" >> ${jsonFile}
+
+echo '"Device Info": [' >> ${jsonFile}
+echo "{" >> ${jsonFile}
+      echo '"Asset Tag": "String",' >> ${jsonFile}
+      echo '"Device Model": "String",' >> ${jsonFile}
+      echo '"BIOS Revision": "String",' >> ${jsonFile}
+      echo '"BIOS Date": "String"' >> ${jsonFile}
+echo "}" >> ${jsonFile}
+echo "]," >> ${jsonFile}
+
+echo '"Disk Drive Name": [' >> ${jsonFile}
+echo "{" >> ${jsonFile}
+      echo '"Drive Name": "String",' >> ${jsonFile}
+      echo '"Number of Partitions": "String",' >> ${jsonFile}
+	  
+      echo '"Partition Name": [' >> ${jsonFile}
+      echo   "{" >> ${jsonFile}
+      echo     '"Partition Usage": "String",' >> ${jsonFile}
+      echo     '"Partition FSCK": "String"' >> ${jsonFile}
+      echo   "}" >> ${jsonFile}
+	  echo "]," >> ${jsonFile}
+	  
+	  
+	  echo '"Emmc data": "string",' >> ${jsonFile}
+      echo '"NVME data": "string",' >> ${jsonFile}
+      echo '"Smart Test Results": "string",' >> ${jsonFile}
+      echo '"Smart Log": "string"' >> ${jsonFile}
+	  echo   "}" >> ${jsonFile}
+echo "]," >> ${jsonFile}
+
+echo '"Network Adapters": [' >> ${jsonFile}
+echo "{" >> ${jsonFile}
+      echo '"Adapter Name": [' >> ${jsonFile}
+        echo "{" >> ${jsonFile}
+          echo '"Status": "String",' >> ${jsonFile}
+          echo '"State": "String"' >> ${jsonFile}
+        echo   "}" >> ${jsonFile}
+echo "]" >> ${jsonFile}
+echo   "}" >> ${jsonFile}
+echo "]," >> ${jsonFile}
+  echo '"Memory Testing":[{' >> ${jsonFile}
+    echo '"Results" : "String"' >> ${jsonFile}
+echo "}]" >> ${jsonFile}
+echo "}" >> ${jsonFile}
+
+
+
+
+{"Drive Name":"/dev/sda","Number of Partitions":"2","/dev/sda1":[{"Partition Usage":"","Partition FSCK":"fsck from util-linux 2.31.1 fsck.fat 4.1 (2017-01-24) /dev/sda1: 12 files, 1558/130812 clusters"}],"/dev/sda2":[{"Partition Usage":"9%","Partition FSCK":"fsck from util-linux 2.31.1 /dev/sda2 is mounted."}]}

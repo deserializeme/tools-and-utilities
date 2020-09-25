@@ -1,0 +1,20 @@
+---
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: yes
+  async: 1000
+  poll: 0
+  register: update_sleeper
+  
+- name: 'apt - check on async update task'
+  async_status:
+    jid: "{{ update_sleeper.ansible_job_id }}"
+  register: job_result
+  until: job_result.finished
+  retries: 999
+
+- name: Clean unwanted olderstuff
+  apt:
+   autoremove: yes
+   purge: yes
+   

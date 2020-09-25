@@ -1,0 +1,14 @@
+---
+- name: Update all packages to the latest version
+  apt:
+    upgrade: dist
+  async: 1000
+  poll: 0
+  register: upgrade_sleeper
+  
+- name: 'apt - check on async upgrade task'
+  async_status:
+    jid: "{{ upgrade_sleeper.ansible_job_id }}"
+  register: job_result
+  until: job_result.finished
+  retries: 999
