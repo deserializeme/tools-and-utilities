@@ -1,0 +1,31 @@
+{
+	"packages": [
+		{
+			"Name": "apt-clone",
+			"Version": "0.4.1ubuntu2",
+			"Force": "yes",
+			"Dpkg_Options": "Force-downgrade",
+			"Selection": "hold"
+		},
+		{
+			"Name": "atop",
+			"Version": "2.3.0-1",
+			"Force": "yes",
+			"Dpkg_Options": "Force-downgrade",
+			"Selection": "hold"
+		},
+		{
+			"Name": "autossh",
+			"Version": "1.4e-4",
+			"Force": "yes",
+			"Dpkg_Options": "Force-downgrade",
+			"Selection": "hold"
+		},
+	],
+	"kernel": [
+	    {
+            "Name": "linux-image-generic",
+            "Version": "4.15.0.122.109"
+        }
+	]
+}

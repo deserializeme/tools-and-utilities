@@ -1,0 +1,16 @@
+---
+- name: install approved versions of packages
+  become: yes
+  apt:
+    name: "{{ item.Name }}={{ item.Version }}"
+    state: present
+    force: "{{ item.Force }}"
+    dpkg_options: "{{ item.Dpkg_Options }}"
+  loop: "{{ hostvars['localhost'].package_list['packages'] }}"
+
+- name: mark packages to be held
+  become: yes
+  dpkg_selections: 
+    name: "{{ item.Name }}"
+    selection: "{{ item.Selection }}"
+  loop: "{{ hostvars['localhost'].package_list['packages'] }}"
