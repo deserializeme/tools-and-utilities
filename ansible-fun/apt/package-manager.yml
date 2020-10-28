@@ -1,0 +1,31 @@
+- hosts: localhost
+
+  vars:
+    package_list_json: "{{ lookup('file', 'packages.json') | from_json }}"
+
+  tasks:
+
+  - name: Setting package list as a fact
+    set_fact: package_list="{{ package_list_json }}"
+
+
+- hosts: all
+  strategy: linear
+  remote_user: <some-user>
+  gather_facts: no
+  become: true
+  become_user: root
+
+  pre_tasks:
+
+  - name: install packages and enforce version constarints
+    include_role:
+      name: update_packages
+
+  - name: get the kernel version on the remote device
+    shell: "apt-cache policy linux-image-generic |grep Installed |awk '{print $2}'"
+    register: kernel_version
+
+  - name: compareinstalled version of limux-image-generic against desired version
+    debug: msg="{{ hostvars['localhost'].package_list['kernel'][0].Version }} vs {{ kernel_version.stdout }}"
+    when: kernel_version.stdout != hostvars['localhost'].package_list['kernel'][0].Version

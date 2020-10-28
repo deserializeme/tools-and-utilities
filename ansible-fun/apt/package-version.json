@@ -25,7 +25,7 @@
 	"kernel": [
 	    {
             "Name": "linux-image-generic",
-            "Version": "4.15.0.122.109 500"
+            "Version": "4.15.0.122.109"
         }
 	]
 }
